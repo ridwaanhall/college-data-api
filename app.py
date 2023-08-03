@@ -1,12 +1,12 @@
 from flask import Flask, request, redirect, url_for, jsonify
 from urllib.parse import quote
-from Controller import MahasiswaController
+from Controller import MahasiswaController, PerguruanTinggiController
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello_world():
-  return "ig : ridwaanhall"
+  return "url : ridwaanhall"
 
 @app.route('/hit_mhs', methods=['GET', 'POST'])
 def hit_mhs():
@@ -57,6 +57,15 @@ def data_mahasiswa(id_mahasiswa):
   data = MahasiswaController.data_mahasiswa(id_mahasiswa)
   return jsonify(data)
 
+@app.route('/load_pt', methods=['GET'])
+def load_pt():
+  data = PerguruanTinggiController.load_pt()
+  return jsonify(data)
+
+@app.route('/data_pt/<string:link_pt>', methods=['GET'])
+def data_pt(link_pt):
+  data = PerguruanTinggiController.data_pt(link_pt)
+  return jsonify(data)
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)

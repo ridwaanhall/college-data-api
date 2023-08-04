@@ -4,46 +4,199 @@ from Controller import MahasiswaController, PerguruanTinggiController, ProdiCont
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def home():
   return {
-    'owner': [
-      {
-      'name'   : 'Ridwan Halim',
-      'address': 'Boyolali, Central Java',
-      'my_wife': 'Hafidhah Afkariana'
-      }
-    ],
-    'social_media': [
-      {
+    'owner': [{
+      'name': 'ridwaanhall',
+      'address': 'Sleman, DIY',
+      'my_wife': 'Afida'
+    }],
+    'social_media': [{
       'instagram': 'https://www.instagram.com/ridwaanhall',
-      'facebook' : 'https://www.facebook.com/ridwaanhall',
-      'tiktok'   : 'https://www.tiktok.com/@ridwaanhall',
-      'twitter'  : 'https://twitter.com/ridwaanhall',
-      'threads'  : 'https://www.threads.net/@ridwaanhall',
-      'linkedin' : 'https://www.linkedin.com/in/ridwaanhall',
-      'github'   : 'https://github.com/ridwaanhall',
-      'replit'   : 'https://replit.com/@ridwaanhall',
-      'telegram' : 'https://t.me/ridwaanhall'
-      }
-    ],
-    'routes_available': [
+      'facebook': 'https://www.facebook.com/ridwaanhall',
+      'tiktok': 'https://www.tiktok.com/@ridwaanhall',
+      'twitter': 'https://twitter.com/ridwaanhall',
+      'threads': 'https://www.threads.net/@ridwaanhall',
+      'linkedin': 'https://www.linkedin.com/in/ridwaanhall',
+      'github': 'https://github.com/ridwaanhall',
+      'replit': 'https://replit.com/@ridwaanhall',
+      'telegram': 'https://t.me/ridwaanhall'
+    }],
+    'routes_available': 
+    [
       {
-        'url_base' : 'https://data-mahasiswa.ridwaanhall.repl.co',
-        'route': '/hit_mhs',
-        'note': 'this route for search mahasiswa data. such as name, etc.'
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/hit_mhs',
+      'note':
+      'this route for search of list mahasiswa data. By input a text. available to input by number of student, university, name, or the combination of number, university, and name. after enter an input, url will redirect to this url /hit_mhs/<string:mahasiswa>'
       },
       {
-        
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/hit_mhs/<string:mahasiswa>',
+      'note':
+      'this route for show list result after input the text from route /hit_mhs. the output is a json data (text: name, nim, pt, prodi. website-link:url/id)'
       },
       {
-        
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_mahasiswa',
+      'note':
+      'this route for search detail of mahasiswa using id. will redirect to /data_mahasiswa/<string:id_mahasiswa>'
       },
       {
-        
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_mahasiswa/<string:id_mahasiswa>',
+      'note':
+      'this route for show detail of mahasiswa by id. the json data is datastatuskuliah : id_smt, nm_stat_mhs, sks_smt. datastudi : id_smt, kode_mk, nilai_huruf, nm_mk, sks_mk. dataumum : jk, ket_keluar, link_pt, link_prodi, mulai_smt, namajenjang, namaprodi, namapt, nipd, nm_jns_daftar, nm_pd, nm_prodi_asal, n_pt_asal, no_seri_ijazah, reg_pd, ret_prof, tgl_keluar.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/load_pt',
+      'note':
+      'this route for show list if pt. id_sp, kode_pt, nama_pt.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt',
+      'note':
+      'this route using for input data id of pt. and redirect to /data_pt/<string:link_pt>.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt/<string:link_pt>',
+      'note':
+      'this route using for detail of pt. json data such as akreditasi_list : akreditasi, tgl_akreditasi, tgl_berlaku. bujur, email, id_sp, internet, jln, kode_pos, laporatorium, lintang, listrik, luas_tanah, nama_rektor, nama_wil, nm_lemb, no_fax, no_tel, npsn, perpustakaan, ruang_kelas, sk_pendirian_sp, stat_sp, tgl_perdiri, tgl_sk_pendirian_sp, website.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt_prodi',
+      'note':
+      'this route for search detail prodi of pt by id of pt. will redirect to /data_pt_prodi/<string:link_pt>.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt_prodi/<string:link_pt>',
+      'note':
+      'this route for json data. such as akreditasi, id_sms, jenjang, kode_prodi, nm_lemb, rasio_list : dosen, dosenNidk, dosenNidn, mahasiswa, semester. stat_prodi.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt_jumlah',
+      'note':
+      'this route for search statistic from pt by id. will redirect to /data_pt_jumlah/<string:link_pt>'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt_jumlah/<string:link_pt>',
+      'note':
+      'this route for json data of statistic by id. such as jumlah_bidangilmu, jumlah_fakultas, jumlah_prodi, jumlah_prodi_akreditasi : A, B, Baik sekali, C, unggul. rasio_list.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt_dosen',
+      'note':
+      'this route for search statistic of dosen from pt by id. will redirect to /data_pt_dosen/<string:link_pt>.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_pt_dosen/<string:link_pt>',
+      'note':
+      'this route for json data. such as tetap : jumlah_dosen_jabatan, Categories, series, data, name, jumlah_dosen_jenis_kelamin, L, P, jumlah_dosen_jenjang, jumlah_dosen_registrasi, tidak_tetap.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/stat_pt',
+      'note':
+      'this route for search statistic data of pt. will redirect to /stat_pt/<string:link_pt>.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/stat_pt/<string:link_pt>',
+      'note':
+      'this route for json data statistic of pt. such as id, rasio : nm_jenj_didik, total_kurang_6, total_lebih_, total_semua. rata_lama_studi : nm_jenj_didik, total_cont, total_years.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/load_prodi',
+      'note':
+      'this route for all list of prodi without filter. such as id_sms, id_sp, kode_prodi, nama_prodi.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/load_prodi/<string:id_sp>',
+      'note':
+      'this route for list of prodi using filter by id_sp. json data is id_sms, id_sp, kode_prodi, nama_prodi.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_prodi/<string:link_prodi>',
+      'note':
+      'this route for list json data of prodi data. such as datadosen : gelar, id, idreg, linkdosen, nama, pendidikan. datadosenrasio : gelar_dosen, id, idreg, jenjang_dosen, jenjang_komebase, linkdosen, nama, nidn, prodi_homebase, pt. datamhs : jml, mulai_smt. detailumum : akreditasi, bujur, capaian, deskripsi, email, id_sms, jln, kode_pos, kode_prodi, kompetensi, linkpt, lintang, misi, , namajenjang, namapt, nm_lemb, no_fax, no_tel, npsn, sk_selenggara, visi. rasio : jmldosen, jmlmhs, kode_program_studi, smt.'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/data_dosen/<string:link_dosen>',
+      'note':
+      'this route for json data of dosen data. such as datamengajar : id_smt, kode_mk, linkpt, namapt, nm_kls, nm_mk. datapendidikan : namajenjang, nm_sp_formal, singkatan_gelar, thn_lulus. dataumum : foto, fungsional, -d_sdm, ikatankerja, jk, linkprodi, linkpt, namaprodi, namapt, nm_sdm, pend_tinggi, statuskeaktifan, tmpt_lahir'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/hit',
+      'note':
+      'this route for search of list pt, dosen, prodi data. By input a text. available to input by all available of data search. after enter an input, url will redirect to this url /hit/<string:dsn_prodi_pt>'
+      },
+      {
+      'url_base':
+      'https://data-mahasiswa.ridwaanhall.repl.co',
+      'route':
+      '/hit/<string:dsn_prodi_pt>',
+      'note':
+      'this route for json data detail of data dsn_prodi_pt. such as dosen : name, nidn, pt, prodi. prodi : , pt : pt, npsn, singkatan, alamat, link data'
       }
     ]
   }
+
 
 @app.route('/hit_mhs', methods=['GET', 'POST'])
 def hit_mhs():
@@ -63,11 +216,13 @@ def hit_mhs():
     </form>
     '''
 
+
 @app.route('/hit_mhs/<string:mahasiswa>', methods=['GET'])
 def hit_mhs_detail(mahasiswa):
   encoded_mahasiswa = quote(mahasiswa)
   data = MahasiswaController.hit_mhs(encoded_mahasiswa)
   return jsonify(data)
+
 
 @app.route('/data_mahasiswa', methods=['GET', 'POST'])
 def data_mahasiswa_home():
@@ -87,15 +242,18 @@ def data_mahasiswa_home():
     </form>
     '''
 
+
 @app.route('/data_mahasiswa/<string:id_mahasiswa>', methods=['GET'])
 def data_mahasiswa(id_mahasiswa):
   data = MahasiswaController.data_mahasiswa(id_mahasiswa)
   return jsonify(data)
 
+
 @app.route('/load_pt', methods=['GET'])
 def load_pt():
   data = PerguruanTinggiController.load_pt()
   return jsonify(data)
+
 
 @app.route('/data_pt', methods=['GET', 'POST'])
 def data_pt():
@@ -115,10 +273,12 @@ def data_pt():
     </form>
     '''
 
+
 @app.route('/data_pt/<string:link_pt>', methods=['GET'])
 def data_pt_detail(link_pt):
   data = PerguruanTinggiController.data_pt(link_pt)
   return jsonify(data)
+
 
 @app.route('/data_pt_prodi', methods=['GET', 'POST'])
 def data_pt_prodi():
@@ -138,10 +298,12 @@ def data_pt_prodi():
     </form>
     '''
 
+
 @app.route('/data_pt_prodi/<string:link_pt>', methods=['GET'])
 def data_pt_prodi_detail(link_pt):
-    data = PerguruanTinggiController.data_pt_prodi(link_pt)
-    return jsonify(data)
+  data = PerguruanTinggiController.data_pt_prodi(link_pt)
+  return jsonify(data)
+
 
 @app.route('/data_pt_jumlah', methods=['GET', 'POST'])
 def data_pt_jumlah():
@@ -161,10 +323,12 @@ def data_pt_jumlah():
     </form>
     '''
 
+
 @app.route('/data_pt_jumlah/<string:link_pt>', methods=['GET'])
 def data_pt_jumlah_detail(link_pt):
-    data = PerguruanTinggiController.data_pt_jumlah(link_pt)
-    return jsonify(data)
+  data = PerguruanTinggiController.data_pt_jumlah(link_pt)
+  return jsonify(data)
+
 
 @app.route('/data_pt_dosen', methods=['GET', 'POST'])
 def data_pt_dosen():
@@ -181,10 +345,12 @@ def data_pt_dosen():
     </form>
     '''
 
+
 @app.route('/data_pt_dosen/<string:link_pt>', methods=['GET'])
 def data_pt_dosen_detail(link_pt):
   data = PerguruanTinggiController.data_pt_dosen(link_pt)
   return jsonify(data)
+
 
 @app.route('/stat_pt', methods=['GET', 'POST'])
 def stat_pt():
@@ -201,15 +367,18 @@ def stat_pt():
     </form>
     '''
 
+
 @app.route('/stat_pt/<string:link_pt>', methods=['GET'])
 def stat_pt_detail(link_pt):
   data = PerguruanTinggiController.stat_pt(link_pt)
   return jsonify(data)
 
+
 @app.route('/load_prodi', methods=['GET'])
 def load_prodi():
   data = ProdiController.load_prodi()
   return jsonify(data)
+
 
 # search prodi using id_sp (pt)
 @app.route('/load_prodi/<string:id_sp>', methods=['GET'])
@@ -217,15 +386,18 @@ def load_detail_prodi(id_sp):
   data = ProdiController.load_detail_prodi(id_sp)
   return jsonify(data)
 
+
 @app.route('/data_prodi/<string:link_prodi>', methods=['GET'])
 def data_prodi(link_prodi):
   data = ProdiController.data_prodi(link_prodi)
   return jsonify(data)
 
+
 @app.route('/data_dosen/<string:link_dosen>', methods=['GET'])
 def data_dosen(link_dosen):
   data = DosenController.data_dosen(link_dosen)
   return jsonify(data)
+
 
 @app.route('/hit', methods=['GET', 'POST'])
 def hit():
@@ -233,7 +405,8 @@ def hit():
     # Get the input from the form
     dsn_prodi_pt = request.form['dsn_prodi_pt']
     # Redirect to the route with the input as a parameter
-    return redirect(url_for('hit_dsn_prodi_pt_detail', dsn_prodi_pt=dsn_prodi_pt))
+    return redirect(
+      url_for('hit_dsn_prodi_pt_detail', dsn_prodi_pt=dsn_prodi_pt))
   else:
     # Display the input form
     return '''
@@ -245,6 +418,7 @@ def hit():
     </form>
     '''
 
+
 @app.route('/hit/<string:dsn_prodi_pt>', methods=['GET'])
 def hit_dsn_prodi_pt_detail(dsn_prodi_pt):
   # Encode the dsn_prodi_pt parameter to handle special characters
@@ -252,6 +426,7 @@ def hit_dsn_prodi_pt_detail(dsn_prodi_pt):
   # Use the encoded_dsn_prodi_pt as input for the dsn_prodi_ptController.hit_mhs() function
   data = HitController.hit(encoded_dsn_prodi_pt)
   return jsonify(data)
+
 
 if __name__ == "__main__":
   app.run(host='0.0.0.0', debug=True)

@@ -194,7 +194,8 @@ def home():
       'note':
       'this route for json data detail of data dsn_prodi_pt. such as dosen : name, nidn, pt, prodi. prodi : , pt : pt, npsn, singkatan, alamat, link data'
       }
-    ]
+    ],
+    'source': 'pddikti'
   }
 
 
